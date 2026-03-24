@@ -1,6 +1,7 @@
 // ============================================================
 // StatusBadge — displays ticket status with semantic colors
 // ============================================================
+import React from "react";
 import type { TicketStatus } from "@/types";
 
 interface Props {
