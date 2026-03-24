@@ -1,6 +1,7 @@
 // ============================================================
 // PriorityBadge — displays ticket priority with semantic colors
 // ============================================================
+import React from "react";
 import type { TicketPriority } from "@/types";
 import { AlertTriangle, ArrowDown, Minus } from "lucide-react";
 
