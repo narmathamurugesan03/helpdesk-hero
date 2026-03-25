@@ -44,6 +44,8 @@ const App = () => (
                 <Route path="/my-tickets"    element={<TicketListPage myTickets />} />
                 <Route path="/tickets/new"   element={<CreateTicketPage />} />
                 <Route path="/tickets/:id"   element={<TicketDetailPage />} />
+                <Route path="/users"         element={<UsersPage />} />
+                <Route path="/settings"      element={<SettingsPage />} />
               </Route>
 
               {/* Default redirect */}
