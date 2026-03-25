@@ -18,6 +18,8 @@ import DashboardPage from "@/pages/DashboardPage";
 import TicketListPage from "@/pages/tickets/TicketListPage";
 import CreateTicketPage from "@/pages/tickets/CreateTicketPage";
 import TicketDetailPage from "@/pages/tickets/TicketDetailPage";
+import UsersPage from "@/pages/UsersPage";
+import SettingsPage from "@/pages/SettingsPage";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +44,8 @@ const App = () => (
                 <Route path="/my-tickets"    element={<TicketListPage myTickets />} />
                 <Route path="/tickets/new"   element={<CreateTicketPage />} />
                 <Route path="/tickets/:id"   element={<TicketDetailPage />} />
+                <Route path="/users"         element={<UsersPage />} />
+                <Route path="/settings"      element={<SettingsPage />} />
               </Route>
 
               {/* Default redirect */}
