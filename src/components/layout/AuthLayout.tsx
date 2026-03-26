@@ -41,6 +41,9 @@ export const AuthLayout: React.FC = () => {
           </div>
         </main>
       </div>
+
+      {/* Floating chatbot */}
+      <Chatbot />
     </div>
   );
 };
