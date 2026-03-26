@@ -6,6 +6,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
+import { Chatbot } from "@/components/shared/Chatbot";
 
 export const AuthLayout: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -40,6 +41,9 @@ export const AuthLayout: React.FC = () => {
           </div>
         </main>
       </div>
+
+      {/* Floating chatbot */}
+      <Chatbot />
     </div>
   );
 };
