@@ -96,10 +96,45 @@ type TabId = typeof TABS[number]["id"];
 export default function SettingsPage() {
   const [tab, setTab] = useState<TabId>("general");
   const [saved, setSaved] = useState(false);
+  const { themeColor, setThemeColor, logo, setLogo } = useTheme();
 
   // General settings
   const [systemName, setSystemName]     = useState("Smart IT Helpdesk");
   const [language, setLanguage]         = useState("en");
+
+  // Logo upload
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [logoFileName, setLogoFileName] = useState<string | null>(null);
+  const [logoError, setLogoError]       = useState<string | null>(null);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setLogoError(null);
+    // Validate type
+    if (!["image/png", "image/svg+xml", "image/jpeg"].includes(file.type)) {
+      setLogoError("Only PNG, SVG, or JPEG files are allowed.");
+      return;
+    }
+    // Validate size (2 MB)
+    if (file.size > 2 * 1024 * 1024) {
+      setLogoError("File must be under 2 MB.");
+      return;
+    }
+    setLogoFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setLogo(dataUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeLogo = () => {
+    setLogo(null);
+    setLogoFileName(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   // Ticket settings
   const [defaultStatus]                 = useState("Open");
@@ -122,7 +157,6 @@ export default function SettingsPage() {
 
   // Appearance
   const [darkMode, setDarkMode]         = useState(false);
-  const [themeColor, setThemeColor]     = useState("#3b82f6");
 
   const handleSave = () => {
     setSaved(true);
