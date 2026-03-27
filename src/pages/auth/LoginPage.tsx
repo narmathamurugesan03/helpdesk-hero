@@ -101,17 +101,18 @@ export default function LoginPage() {
 
           <div className="px-8 pt-8 pb-10">
             {/* Brand header */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-11 h-11 rounded-xl bg-[hsl(var(--primary))] flex items-center justify-center shadow-[0_0_20px_hsl(221_83%_53%/0.5)]">
-                <Headphones className="w-6 h-6 text-white" />
+            <div className="flex items-center gap-4 mb-8">
+              <div
+                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-[0_0_28px_hsl(221_83%_53%/0.45)] transition-transform duration-300 hover:scale-110 hover:shadow-[0_0_36px_hsl(221_83%_53%/0.6)]"
+                style={{
+                  background: "linear-gradient(135deg, hsl(var(--primary)), hsl(250 80% 60%))",
+                }}
+              >
+                <Headphones className="w-6 h-6 text-white drop-shadow-md" />
               </div>
               <div>
-                <h1 className="text-white font-bold text-lg leading-tight">IT Helpdesk</h1>
-                <p className="text-white/40 text-xs">Smart Support Platform</p>
-              </div>
-              <div className="ml-auto flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-3 py-1">
-                <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                <span className="text-emerald-400 text-xs font-medium">Secure</span>
+                <h1 className="text-white font-bold text-xl leading-tight tracking-tight">IT Helpdesk</h1>
+                <p className="text-white/45 text-xs mt-0.5">Smart Support Platform</p>
               </div>
             </div>
 
