@@ -41,6 +41,7 @@ interface Props {
 
 export const Sidebar: React.FC<Props> = ({ collapsed, onToggle }) => {
   const { currentUser, logout } = useAuth();
+  const { logo } = useTheme();
 
   const visible = navItems.filter(
     (item) => currentUser && item.roles.includes(currentUser.role)
