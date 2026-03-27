@@ -333,9 +333,9 @@ export default function UsersPage() {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
-          <div className="relative bg-card rounded-2xl shadow-[var(--shadow-modal)] border border-border w-full max-w-md animate-[fadeSlideUp_0.25s_ease-out] overflow-hidden">
+          <div className="relative bg-card rounded-2xl shadow-[var(--shadow-modal)] border border-border w-full max-w-md animate-[fadeSlideUp_0.25s_ease-out] overflow-hidden flex flex-col max-h-[90vh]">
             {/* Modal header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <UserPlus className="w-4 h-4 text-primary" />
