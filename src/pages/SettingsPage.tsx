@@ -1,11 +1,12 @@
 // ============================================================
 // Settings Page — tabbed panel with 5 sections
 // ============================================================
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Settings, Globe, Ticket, Bell, Shield, Palette,
-  Upload, Check, AlertCircle, ChevronDown,
+  Upload, Check, AlertCircle, ChevronDown, X, Image,
 } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // ── Toggle Switch component ──────────────────────────────────
 const Toggle: React.FC<{ checked: boolean; onChange: (v: boolean) => void; label?: string }> = ({ checked, onChange, label }) => (
@@ -95,10 +96,45 @@ type TabId = typeof TABS[number]["id"];
 export default function SettingsPage() {
   const [tab, setTab] = useState<TabId>("general");
   const [saved, setSaved] = useState(false);
+  const { themeColor, setThemeColor, logo, setLogo } = useTheme();
 
   // General settings
   const [systemName, setSystemName]     = useState("Smart IT Helpdesk");
   const [language, setLanguage]         = useState("en");
+
+  // Logo upload
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [logoFileName, setLogoFileName] = useState<string | null>(null);
+  const [logoError, setLogoError]       = useState<string | null>(null);
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setLogoError(null);
+    // Validate type
+    if (!["image/png", "image/svg+xml", "image/jpeg"].includes(file.type)) {
+      setLogoError("Only PNG, SVG, or JPEG files are allowed.");
+      return;
+    }
+    // Validate size (2 MB)
+    if (file.size > 2 * 1024 * 1024) {
+      setLogoError("File must be under 2 MB.");
+      return;
+    }
+    setLogoFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setLogo(dataUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeLogo = () => {
+    setLogo(null);
+    setLogoFileName(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   // Ticket settings
   const [defaultStatus]                 = useState("Open");
@@ -121,7 +157,6 @@ export default function SettingsPage() {
 
   // Appearance
   const [darkMode, setDarkMode]         = useState(false);
-  const [themeColor, setThemeColor]     = useState("#3b82f6");
 
   const handleSave = () => {
     setSaved(true);
@@ -174,16 +209,45 @@ export default function SettingsPage() {
             <FieldInput value={systemName} onChange={(e) => setSystemName(e.target.value)} />
           </FormRow>
           <div className="border-t border-border" />
-          <FormRow label="Logo Upload" hint="PNG or SVG, max 2 MB">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-dashed border-border bg-muted/30
-                hover:bg-muted/60 hover:border-primary/50 transition-all text-sm text-muted-foreground hover:text-foreground">
-                <Upload className="w-4 h-4" />
-                Choose file…
-              </div>
-              <input type="file" accept="image/*" className="hidden" />
-              <span className="text-xs text-muted-foreground">No file chosen</span>
-            </label>
+          <FormRow label="Logo Upload" hint="PNG, SVG, or JPEG — max 2 MB">
+            <div className="space-y-3">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-dashed border-border bg-muted/30
+                  hover:bg-muted/60 hover:border-primary/50 transition-all text-sm text-muted-foreground hover:text-foreground">
+                  <Upload className="w-4 h-4" />
+                  Choose file…
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/svg+xml,image/jpeg"
+                  className="hidden"
+                  onChange={handleLogoChange}
+                />
+                <span className="text-xs text-muted-foreground">{logoFileName || "No file chosen"}</span>
+              </label>
+              {logoError && (
+                <p className="text-xs text-destructive flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                  {logoError}
+                </p>
+              )}
+              {logo && (
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-xl border border-border bg-muted/20 flex items-center justify-center overflow-hidden group relative">
+                    <img src={logo} alt="Logo preview" className="max-w-full max-h-full object-contain" />
+                  </div>
+                  <button
+                    onClick={removeLogo}
+                    type="button"
+                    className="flex items-center gap-1.5 text-xs text-destructive hover:underline"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    Remove Logo
+                  </button>
+                </div>
+              )}
+            </div>
           </FormRow>
           <div className="border-t border-border" />
           <FormRow label="Default Language" hint="Interface language for all users">
