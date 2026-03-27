@@ -349,7 +349,7 @@ export default function UsersPage() {
               </button>
             </div>
 
-            <div className="px-6 py-5 space-y-4">
+            <div className="px-6 py-5 space-y-4 overflow-y-auto flex-1">
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-foreground mb-1.5">Full Name *</label>
