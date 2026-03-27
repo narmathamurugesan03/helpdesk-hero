@@ -439,7 +439,7 @@ export default function UsersPage() {
             </div>
 
             {/* Modal footer */}
-            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border bg-muted/20">
+            <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border bg-muted/20 flex-shrink-0">
               <button
                 onClick={() => setModalOpen(false)}
                 className="px-4 py-2 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
