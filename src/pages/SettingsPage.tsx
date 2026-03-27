@@ -1,11 +1,12 @@
 // ============================================================
 // Settings Page — tabbed panel with 5 sections
 // ============================================================
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Settings, Globe, Ticket, Bell, Shield, Palette,
-  Upload, Check, AlertCircle, ChevronDown,
+  Upload, Check, AlertCircle, ChevronDown, X, Image,
 } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // ── Toggle Switch component ──────────────────────────────────
 const Toggle: React.FC<{ checked: boolean; onChange: (v: boolean) => void; label?: string }> = ({ checked, onChange, label }) => (
