@@ -209,16 +209,45 @@ export default function SettingsPage() {
             <FieldInput value={systemName} onChange={(e) => setSystemName(e.target.value)} />
           </FormRow>
           <div className="border-t border-border" />
-          <FormRow label="Logo Upload" hint="PNG or SVG, max 2 MB">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-dashed border-border bg-muted/30
-                hover:bg-muted/60 hover:border-primary/50 transition-all text-sm text-muted-foreground hover:text-foreground">
-                <Upload className="w-4 h-4" />
-                Choose file…
-              </div>
-              <input type="file" accept="image/*" className="hidden" />
-              <span className="text-xs text-muted-foreground">No file chosen</span>
-            </label>
+          <FormRow label="Logo Upload" hint="PNG, SVG, or JPEG — max 2 MB">
+            <div className="space-y-3">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-dashed border-border bg-muted/30
+                  hover:bg-muted/60 hover:border-primary/50 transition-all text-sm text-muted-foreground hover:text-foreground">
+                  <Upload className="w-4 h-4" />
+                  Choose file…
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/svg+xml,image/jpeg"
+                  className="hidden"
+                  onChange={handleLogoChange}
+                />
+                <span className="text-xs text-muted-foreground">{logoFileName || "No file chosen"}</span>
+              </label>
+              {logoError && (
+                <p className="text-xs text-destructive flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5" />
+                  {logoError}
+                </p>
+              )}
+              {logo && (
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-xl border border-border bg-muted/20 flex items-center justify-center overflow-hidden group relative">
+                    <img src={logo} alt="Logo preview" className="max-w-full max-h-full object-contain" />
+                  </div>
+                  <button
+                    onClick={removeLogo}
+                    type="button"
+                    className="flex items-center gap-1.5 text-xs text-destructive hover:underline"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                    Remove Logo
+                  </button>
+                </div>
+              )}
+            </div>
           </FormRow>
           <div className="border-t border-border" />
           <FormRow label="Default Language" hint="Interface language for all users">
