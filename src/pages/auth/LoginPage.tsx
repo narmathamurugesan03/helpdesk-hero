@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import {
-  Headphones, Eye, EyeOff, AlertCircle, LogIn, Mail, Lock, Shield,
+  Eye, EyeOff, AlertCircle, LogIn, Mail, Lock, Shield,
 } from "lucide-react";
 import loginBg from "@/assets/login-bg.jpg";
 
