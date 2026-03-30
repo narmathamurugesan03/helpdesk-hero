@@ -101,19 +101,9 @@ export default function LoginPage() {
 
           <div className="px-8 pt-8 pb-10">
             {/* Brand header */}
-            <div className="flex items-center gap-4 mb-8">
-              <div
-                className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-[0_0_28px_hsl(221_83%_53%/0.45)] transition-transform duration-300 hover:scale-110 hover:shadow-[0_0_36px_hsl(221_83%_53%/0.6)]"
-                style={{
-                  background: "linear-gradient(135deg, hsl(var(--primary)), hsl(250 80% 60%))",
-                }}
-              >
-                <Headphones className="w-6 h-6 text-white drop-shadow-md" />
-              </div>
-              <div>
-                <h1 className="text-white font-bold text-xl leading-tight tracking-tight">IT Helpdesk</h1>
-                <p className="text-white/45 text-xs mt-0.5">Smart Support Platform</p>
-              </div>
+            <div className="mb-8">
+              <h1 className="text-white font-bold text-xl leading-tight tracking-tight">IT Helpdesk</h1>
+              <p className="text-white/45 text-xs mt-0.5">Smart Support Platform</p>
             </div>
 
             <h2 className="text-2xl font-bold text-white mb-1">Welcome back</h2>
